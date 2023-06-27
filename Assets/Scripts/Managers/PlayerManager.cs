@@ -25,7 +25,6 @@ public class PlayerManager: NetworkBehaviour
     public void AddPlayer(Player player)
     {
         if (IsServer) { AddPlayer(player, true); }
-        else { AddPlayerServerRPC(player, true); }
     }
 
     private void AddPlayer(Player player, bool tru)
@@ -36,7 +35,6 @@ public class PlayerManager: NetworkBehaviour
     public void RemovePlayer(Player player)
     {
         if (IsServer) { RemovePlayer(player, true); }
-        else { RemovePlayerServerRPC(player, true); }
 
     }
 
@@ -46,16 +44,7 @@ public class PlayerManager: NetworkBehaviour
     }
 
 
-    [ServerRpc]
-    private void RemovePlayerServerRPC(Player player, bool tru)
-    {
-        Players.Remove(player);
-    }
-    [ServerRpc]
-    private void AddPlayerServerRPC(Player player, bool tru)
-    {
-        Players.Add(player);
-    }
+    
 
 
 }
