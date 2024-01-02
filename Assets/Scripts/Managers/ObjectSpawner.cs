@@ -21,21 +21,20 @@ namespace Managers
             }
         }
 
-        public GameObject SpawnWithName(string objectName, Transform objectTransform)
+        public void SpawnWithName(string objectName, Transform objectTransform)
         {
-            return SpawnWithNameRpc(objectName, objectTransform);
+            SpawnWithNameServerRpc(objectName, objectTransform.position, objectTransform.rotation);
         }
-        
-
-        [ServerRpc]
-        private GameObject SpawnWithNameRpc(string objectName, Transform objectTransform)
+        [ServerRpc(RequireOwnership = false)]
+        private void SpawnWithNameServerRpc(string objectName, Vector3 position, Quaternion rotation)
         {
             GameObject prefab = PrefabStore.Singleton.FindByName(objectName);
-            GameObject sceneGameObject = Instantiate(prefab, objectTransform.position, objectTransform.rotation, null);
+            GameObject sceneGameObject = Instantiate(prefab, position, rotation, null);
             sceneGameObject.GetComponent<NetworkObject>().Spawn(true);
             sceneGameObject.GetComponent<ISpawnedObject>().Spawn();
-            return sceneGameObject;
         }
+        
+        
 
 
     }

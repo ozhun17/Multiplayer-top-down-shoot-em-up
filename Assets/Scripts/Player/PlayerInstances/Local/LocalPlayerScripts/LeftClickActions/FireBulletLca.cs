@@ -33,10 +33,7 @@ namespace Player.PlayerInstances.Local.LocalPlayerScripts.LeftClickActions
         
         public void Fire()
         {
-            NetworkObject bulletGo = ObjectSpawner.Singleton.SpawnWithName("Bullet", _gunTransform)
-                .GetComponent<NetworkObject>();
-            Bullet bullet = bulletGo.GetComponent<Bullet>();
-            bullet.OnNetworkSpawn();
+            ObjectSpawner.Singleton.SpawnWithName("Bullet", _gunTransform);
         }
         
     }
