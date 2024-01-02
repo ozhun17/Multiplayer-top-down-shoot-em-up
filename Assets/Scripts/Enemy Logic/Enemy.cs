@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Unity.Netcode;
 
-public class Enemy : NetworkBehaviour 
+namespace Enemy_Logic
 {
+    public class Enemy : NetworkBehaviour 
+    {
 
+    }
 }

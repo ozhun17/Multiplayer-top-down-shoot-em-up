@@ -1,50 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using Player.PlayerInstances;
 using Unity.Netcode;
-using UnityEngine.Networking;
-public class PlayerManager: NetworkBehaviour
+
+namespace Managers
 {
+    public class PlayerManager: NetworkBehaviour
+    {
     
-    private List<Player> Players;
-    public static PlayerManager Singleton;
+        private List<PlayerInstance> _players;
+        public static PlayerManager Singleton;
 
-    private void Awake()
-    {
-        if (Singleton != null && Singleton != this)
+        private void Awake()
         {
-            Destroy(this);
+            if (Singleton != null && Singleton != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Singleton = this;
+            }
         }
-        else
+
+
+        public void AddPlayer(PlayerInstance player)
         {
-            Singleton = this;
+            if (IsServer) { AddPlayer(player, true); }
         }
-    }
 
+        private void AddPlayer(PlayerInstance player, bool tru)
+        {
+            _players.Add(player);
+        }
 
-    public void AddPlayer(Player player)
-    {
-        if (IsServer) { AddPlayer(player, true); }
-    }
+        public void RemovePlayer(PlayerInstance player)
+        {
+            if (IsServer) { RemovePlayer(player, true); }
 
-    private void AddPlayer(Player player, bool tru)
-    {
-        Players.Add(player);
-    }
+        }
 
-    public void RemovePlayer(Player player)
-    {
-        if (IsServer) { RemovePlayer(player, true); }
-
-    }
-
-    private void RemovePlayer(Player player, bool tru)
-    {
-        Players.Remove(player);
-    }
+        private void RemovePlayer(PlayerInstance player, bool tru)
+        {
+            _players.Remove(player);
+        }
 
 
     
 
 
+    }
 }

@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NetworkUI : MonoBehaviour
+namespace UI
 {
-    public Button host;
-    public Button client;
-
-    // Update is called once per frame
-    void Awake()
+    public class NetworkUI : MonoBehaviour
     {
-        host.onClick.AddListener(() =>
+        public Button host;
+        public Button client;
+
+        // Update is called once per frame
+        void Awake()
         {
-            NetworkManager.Singleton.StartHost();
-        });
-        client.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartClient();
-        });
+            host.onClick.AddListener(() =>
+            {
+                NetworkManager.Singleton.StartHost();
+            });
+            client.onClick.AddListener(() =>
+            {
+                NetworkManager.Singleton.StartClient();
+            });
+        }
     }
 }
