@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ namespace Enemy_Logic
 {
     public class EnemySpawner : NetworkBehaviour
     {
-        [SerializeField] private GameObject enemy;
     
         void Update()
         {
@@ -23,8 +23,7 @@ namespace Enemy_Logic
         {
             while(true)
             {
-                GameObject enemy = Instantiate(this.enemy, transform.position, Quaternion.identity, null);
-                enemy.gameObject.GetComponent<NetworkObject>().Spawn();
+                ObjectSpawner.Singleton.SpawnWithName("Enemy", transform);
                 yield return new WaitForSeconds(3.0f);
             }
         

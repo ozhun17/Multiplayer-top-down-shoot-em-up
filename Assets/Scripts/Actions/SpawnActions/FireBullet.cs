@@ -1,31 +1,21 @@
 using Interfaces;
 using Managers;
-using Player.Bullet_Logic;
-using Unity.Netcode;
 using UnityEngine;
 
-namespace Player.PlayerInstances.Local.LocalPlayerScripts.LeftClickActions
+namespace Actions.SpawnActions
 {
-    public class FireBulletLca : MonoBehaviour, IAction
+    public class FireBullet : MonoBehaviour, IAction
     {
         private Transform _gunTransform;
 
         private void Start()
         {
-            Initiate();
-        }
-
-        private void Initiate()
-        {
-            
             _gunTransform = transform.Find("Center").Find("Gun");
-        }
 
-        
+        }
 
         public void Perform()
         {
-            Debug.Log("entered Perform");
             Fire();
         }
 
